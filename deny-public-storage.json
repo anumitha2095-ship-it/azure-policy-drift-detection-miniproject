@@ -1,0 +1,61 @@
+Remediate-Storage-Public-Access 
+
+{
+  "properties": {
+    "displayName": "Remediate-Storage-Public-Access",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "",
+    "metadata": {
+      "category": "Storage",
+      "createdBy": "fdb8ac5d-8307-45cb-93bf-bd5a08a33815",
+      "createdOn": "2025-12-29T01:59:14.9822336Z",
+      "updatedBy": null,
+      "updatedOn": null
+    },
+    "version": "1.0.0",
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Storage/storageAccounts"
+          },
+          {
+            "field": "Microsoft.Storage/storageAccounts/allowBlobPublicAccess",
+            "equals": true
+          }
+        ]
+      },
+      "then": {
+        "effect": "modify",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "operations": [
+            {
+              "operation": "addOrReplace",
+              "field": "Microsoft.Storage/storageAccounts/allowBlobPublicAccess",
+              "value": false
+            }
+          ]
+        }
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/subscriptions/a30a6990-5e2a-4925-9e7e-7dba1e25029c/providers/Microsoft.Authorization/policyDefinitions/f589f3ce073e482d8a3156d5",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "name": "f589f3ce073e482d8a3156d5",
+  "systemData": {
+    "createdBy": "ananthu174@hotmail.com",
+    "createdByType": "User",
+    "createdAt": "2025-12-29T01:59:14.9383105Z",
+    "lastModifiedBy": "ananthu174@hotmail.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2025-12-29T01:59:14.9383105Z"
+  }
+}
